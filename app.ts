@@ -7,10 +7,27 @@ let passport = require('passport');
 let logger = require('morgan');
 let createError = require('http-errors');
 let cors = require('cors');
-
+let mongoose  = require('mongoose');
 require ("dotenv").config();
-require ("./database/config");
-const User = require('./models/User');
+
+async function dbConnection () {
+    try{
+        await mongoose.connect(process.env.DB_CNN, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+          });
+            console.log('Connected to database');
+
+    } catch (err) {
+        console.log(err);
+    }
+    
+  };
+
+dbConnection();
+
+const User = require("./models/user.schema");
+
 
 const app: Application = express();
 
@@ -25,13 +42,5 @@ app.use(cookieParser());
 app.use(logger('dev'));
 
 
-
-app.get("/", (req: Request, res: Response) => {
-    res.send("Hello World!");
-});
-
-app.listen(process.env.PORT, () => {
-    console.log('Server is running on port:', process.env.PORT);
-});
 
 module.exports = app;

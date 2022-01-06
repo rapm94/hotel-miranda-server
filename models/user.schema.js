@@ -1,9 +1,7 @@
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
-let bcrypt = require('bcrypt');
-import { UserI } from "../types/user.types";
-
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const userSchema = new Schema({
     id: {
         type: String,
@@ -35,19 +33,7 @@ const userSchema = new Schema({
         required: true
     }
 });
-userSchema.pre("save", async function (this:any, next:Function) {
-    const user = this;
-    const hash = await bcrypt.hash(this.password, 10);
-  
-    this.password = hash;
-    next();
-  });
-  userSchema.methods.isValidPassword = async function (password:string) {
-    const user = this;
-    const compare = await bcrypt.compare(password, user.password);
-  
-    return compare;
-  };
+
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
