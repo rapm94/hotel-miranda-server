@@ -1,0 +1,119 @@
+$elegant-font: 'OldStandardTT-Regular', serif;
+$modern-font: $modern-font;
+$modern-font-bold: 'Archivo-Bold', sans-serif;
+$miranda-golden: #bead8e;
+$miranda-grey: #777777;
+$miranda-black: #222222;
+
+@media only screen and (min-width: 1000px) {
+  #burger {
+    display: none;
+  }
+
+  .header {
+    background-color: $miranda-black;
+    padding-top: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 30px;
+    .header-bar {
+      .hotel-miranda-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        margin-left: -121.5px;
+        left: 50%;
+        width: 243px;
+        font-size: 26px;
+        padding-top: 0;
+        color: white;
+        .hotel-miranda-logo {
+          width: 80px;
+          height: 80px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 5px;
+          font-size: 40px;
+          font-weight: 700;
+          background: white 0% 0% no-repeat padding-box;
+          box-shadow: 0px 14px 24px #8b8b8b1a;
+          color: $miranda-black;
+        }
+      }
+    }
+    .drop-down-box {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      z-index: 2;
+      background-color: transparent;
+      nav {
+        width: 35%;
+        .drop-down-list {
+          display: flex;
+          margin: 0;
+          padding: 0;
+          padding-left: 3%;
+          align-items: center;
+          background-color: transparent;
+          .drop-down-element {
+            text-align: center;
+            width: 17%;
+            padding-right: 15px;
+            padding-left: 0;
+            font-family: $modern-font;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0px;
+            color: white;
+            background-color: transparent;
+            .link {
+              color: white;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+      .contact-and-icon-container {
+        display: flex;
+        padding-right: 3%;
+        .contact-and-icon {
+          display: flex;
+          width: 100%;
+          flex-direction: row-reverse;
+          align-items: center;
+          padding: 0;
+          padding-left: 10px;
+          .contact-text {
+            display: flex;
+            padding-left: 10px;
+            padding-bottom: 5px;
+            font-weight: 600;
+            font-size: 12px;
+            color: white;
+          }
+          .drop-down-contact {
+            min-width: 140px;
+            padding: 0;
+            font-size: 17px;
+            font-family: $elegant-font;
+            letter-spacing: 0px;
+            color: white;
+          }
+          .drop-down-icon {
+            padding: 0;
+            margin: 0;
+            display: inline-flex;
+            font-size: 20px;
+            align-items: center;
+            justify-content: flex-end;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}

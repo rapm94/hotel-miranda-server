@@ -1,0 +1,109 @@
+$elegant-font: 'OldStandardTT-Regular', serif;
+$modern-font: 'Archivo', sans-serif;
+$modern-font-bold: 'Archivo-Bold', sans-serif;
+$miranda-gold: #bead8e;
+$miranda-grey: #777777;
+$miranda-black: #222222;
+
+.hotel-miranda-logo {
+  display: none;
+}
+.header {
+  margin: none;
+  .header-bar {
+    background-color: $miranda-black;
+    display: inline-flex;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 80px;
+    justify-content: space-between;
+    align-items: center;
+    .hotel-miranda-title {
+      width: 50%;
+      padding-top: 12px;
+      margin-left: 30px;
+      letter-spacing: 2.6px;
+      color: #111111;
+      font-size: 20px;
+      opacity: 1;
+      color: white;
+
+      .hotel-bold {
+        font-weight: bold;
+        color: white;
+      }
+    }
+    .burger {
+      margin-right: 25px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
+  }
+  .drop-down-box {
+    display: none;
+    width: 90%;
+    background-color: #f7f9fa;
+    position: absolute;
+    right: 0px;
+    z-index: 0;
+    text-align: right;
+
+    .drop-down-list {
+      list-style-type: none;
+      align-items: center;
+      width: 100%;
+      padding: 15px 20px;
+      color: white;
+
+      .drop-down-element {
+        padding: 10px;
+        background: #c4bdaf no-repeat fixed center;
+        color: white;
+        padding-right: 40px;
+        font-family: $modern-font;
+        letter-spacing: 1.5px;
+      }
+      .space {
+        height: 10px;
+      }
+    }
+    .contact-and-icon {
+      display: inline-flex;
+      padding: 0px 20px;
+      font-size: 30px;
+      color: $miranda-black;
+      .contact-text {
+        display: none;
+      }
+      .drop-down-contact {
+        color: $miranda-black;
+        padding: 5px 20px;
+        font-size: 18px;
+        font-family: $modern-font;
+        letter-spacing: 1.5px;
+      }
+      .drop-down-icon {
+        width: 30px;
+        height: 30px;
+        margin-bottom: 10px;
+        color: $miranda-black;
+      }
+    }
+
+    &--visible {
+      display: block;
+      //animation: displayMenu 200ms linear;
+    }
+
+    /*@keyframes displayMenu {
+          0% {
+            top: 0;
+          }
+          100% {
+            top: 70px;
+          }
+        }*/
+  }
+}

@@ -1,5 +1,255 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+
+  header.header
+    .header-bar
+      .hotel-miranda-title
+        .hotel-miranda-logo H
+        div
+          .hotel-bold HOTEL
+          div MIRANDA
+      i#burger.fa.fa-bars.burger(aria-hidden='true')
+    #drop-down-box.drop-down-box
+      nav
+        ul.drop-down-list
+          li.drop-down-element
+            a.link(href='./about-us.html')
+              | About Us
+          .space
+          li.drop-down-element
+            a.link(href='./room-list.html')
+              | Rooms
+          .space
+          li.drop-down-element
+            a.link(href='./room-list.html')
+              | Offers
+          .space
+          li.drop-down-element
+            a.link(href='#')
+              | News
+          .space
+          li.drop-down-element
+            a.link(href='./contact.html')
+              | Contact
+      .contact-and-icon-container
+        .contact-and-icon
+          div
+            .contact-text Phone Number
+            #phone-number.drop-down-contact +908 987 877 09
+          i.fa.fa-phone.drop-down-icon(aria-hidden='true')
+        .contact-and-icon
+          div
+            .contact-text Email Address
+            #contact-mail.drop-down-contact info@webmail.com
+          i.fa.fa-envelope.drop-down-icon(aria-hidden='true')
+  section.home-main
+    .home-main-container
+      .ultimate-header THE ULTIMATE LUXURY EXPERIENCE
+      .home-main-text The Perfect
+      .home-main-text Base For You
+      .home-main-button-line
+        button#take-a-tour-button.home-main-button TAKE A TOUR
+        button#learn-more-button.home-main-button LEARN MORE
+  section.book-panel
+    .check-in-line-panel
+      #check-in.check-in-panel
+        p CHECK IN
+        input.check-in-input(type='date')
+      #check-out.check-in-panel
+        p CHECK OUT
+        input.check-in-input(type='date')
+    button.book-button Check availability
+  section.services-section
+    .section-header
+      .since SINCE
+      .year 1994
+    .section-body-center
+      | Situated In Prime Position At The Foot Of The Slopes Of Courchevel Moriond.
+    .services-grid
+      button.service-card.second-height
+        img.service-icon(src='img/breakfast@2x.png')
+        p.service-card-text BREAKFAST
+      button.service-card-negative.second-height
+        img.service-icon(src='img/plane@2x.png')
+        p.service-card-text-negative AIRPORT PICKUP
+      button.service-card.second-height
+        img.service-icon(src='img/luxury@2x.png')
+        p.service-card-text LUXURY ROOM
+      button#bbq-party.service-card.second-height
+        img.service-icon(src='img/barbecue@2x.png')
+        p.service-card-text BBQ PARTY
+      button.service-card.second-height
+        img.service-icon(src='img/location@2x.png')
+        p.service-card-text CITY GUIDE
+  section.room-type-section
+    .section-header ROOM TYPE
+    .section-body Inspired Lodging
+    .room-type-grid
+      #room-type-1.room-type-grid-item
+        .room-type-grid-data
+          i.fa.fa-th.grid-icon(aria-hidden='true')
+          .room-type-number-rooms 12 ROOMS
+        .room-type-grid-title Junior Suite
+      #room-type-2.room-type-grid-item
+        .room-type-grid-data
+          i.fa.fa-th.grid-icon(aria-hidden='true')
+          .room-type-number-rooms 12 ROOMS
+        .room-type-grid-title Junior Suite
+      #room-type-3.room-type-grid-item
+        .room-type-grid-data
+          i.fa.fa-th.grid-icon(aria-hidden='true')
+          .room-type-number-rooms 03 ROOMS
+        .room-type-grid-title Luxury Home Of Fame
+      #room-type-4.room-type-grid-item
+        .room-type-grid-data
+          i.fa.fa-th.grid-icon(aria-hidden='true')
+          .room-type-number-rooms 10 ROOMS
+        .room-type-grid-title Pacific Room
+    button#view-all-button.home-main-button VIEW ALL ROOMS
+  section.call-to-action-section
+    .tour-header
+      .section-header CALL TO ACTION
+      .section-body The Thin Escape.
+      .paragraph-and-button
+        p.action-paragraph Miranda has everything for your trip &amp; every single things.
+        button#tour-button.action-button TAKE A TOUR
+    .tour-advantages
+      .individual-advantage
+        .advantage-icon-frame
+          i.fa.fa-plane.advantage-icon(aria-hidden='true')
+        .advantage-text-container
+          .advantage-title Easy &amp; Free Transport
+          p.advantage-paragraph
+            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+            | incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            | laboris nisi ut aliquip ex ea commodo consequat.
+      .individual-advantage
+        #negative-frame.advantage-icon-frame
+          i#negative-icon.fa.fa-coffee.advantage-icon(aria-hidden='true')
+        .advantage-text-container
+          .advantage-title Clean &amp; Fresh Food
+          p.advantage-paragraph
+            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+            | incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            | laboris nisi ut aliquip ex ea commodo consequat.
+      .individual-advantage
+        .advantage-icon-frame
+          i.fa.fa-life-ring.advantage-icon(aria-hidden='true')
+        .advantage-text-container
+          .advantage-title Play Ground &amp; Swiming Pool
+          p.advantage-paragraph
+            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+            | incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            | laboris nisi ut aliquip ex ea commodo consequat.
+  .border-bottom-advantages
+  section.carousel-section
+    .carousel-container
+      img.carousel-image(src='')
+    .carousel-detail-box
+      .carousel-detail-box-header
+        i.fa.fa-bed.carousel-detail-box-icon(aria-hidden='true')
+        .carousel-detail-box-counter 01/08
+      .carousel-detail-box-title Luxury Room
+      p.carousel-detail-box-description
+        | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+        | eiusmod tempor incididunt ut labore et dolore magna.
+  section.take-a-tour-section
+    .take-a-tour-text
+      .section-header TAKE A TOUR
+      .section-body Discover Our Underground.
+      p.take-a-tour-paragraph
+        | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+        | incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+        | nisi ut aliquip ex ea commodo consequat.
+      button#view-all-button.home-main-button BOOK NOW
+    iframe#discover-video(width='100%' height='315' src='https://www.youtube.com/embed/Bu3Doe45lcU?start=25' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
+  section.testimonials-section
+    .section-header TESTIMONIALS
+    .section-body Client Feedback
+    .feedback-container
+      .feedback-card
+        img.feedback-image(src='./img/testimonial-person.jpg')
+        i.fa.fa-check.feedback-check(aria-hidden='true')
+        p.feedback-name Donald H. Hilixer
+        p.feedback-job FOUNDER, QUX CO.
+        p.feedback-description
+          | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+          | incididunt ut labore et dolore.
+      .feedback-card
+        img.feedback-image(src='./img/testimonial-person.jpg')
+        i.fa.fa-check.feedback-check(aria-hidden='true')
+        p.feedback-name Donald H. Hilixer
+        p.feedback-job FOUNDER, QUX CO.
+        p.feedback-description
+          | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+          | incididunt ut labore et dolore.
+    .testimonials-extra-panel
+      #extra-panel-header.section-header
+        | OUR ROOMS
+      .testimonials-extra-panel-title
+        | Each of our nine lovely double guest rooms feature a private bath, wi-fi, cable television and include full
+        | breakfast.
+      .extra-panel-button-line
+        button#main-button-1.home-main-button TAKE A TOUR
+        button#main-button-2.home-main-button PACKAGE &amp; POLICY
+  section.blog-section
+    .section-header BLOG
+    .section-body-container
+      .section-body News Feeds
+      .blog-button-line
+        button#white-button.blog-button
+          i.fa.fa-arrow-left.blog-arrow-left(aria-hidden='true')
+        button#golden-button.blog-button
+          i.fa.fa-arrow-right.blog-arrow-right(aria-hidden='true')
+    .post-container
+      .post
+        img.post-image(src='./img/news-photo-1.jpg')
+        .post-data
+          .post-card-data
+            i.fa.fa-calendar.news-feeds-icon(aria-hidden='true')
+            p.post-card-text 23rd March 2019
+          .post-card-data
+            i.fa.fa-user-o.news-feeds-icon(aria-hidden='true')
+            p.post-card-text By Admin
+        .post-title Each of our 8 double rooms has its own distinct.
+        .post-description
+          | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+          | incididunt ut labore et dolore.
+      .post
+        img.post-image(src='./img/news-photo-2.jpg')
+        .post-data
+          .post-card-data
+            i.fa.fa-calendar.news-feeds-icon(aria-hidden='true')
+            p.post-card-text 23rd March 2019
+          .post-card-data
+            i.fa.fa-user-o.news-feeds-icon(aria-hidden='true')
+            p.post-card-text By Admin
+        .post-title Each of our 8 double rooms has its own distinct.
+        .post-description
+          | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+          | incididunt ut labore et dolore.
+  section.subscribe-section
+    .hotel-miranda-title
+      .hotel-miranda-icon H
+      div
+        .hotel-bold HOTEL
+        div MIRANDA
+    p.subscribe-text
+      | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed doing eiusmod tempor
+      | incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+      | nisi.
+    .subscribe-form
+      input.subscribe-input(placeholder='ENTER YOUR EMAIL ADDRESS')
+      button.subscribe-button SUBSCRIBE
+  footer
+    .copyright COPYRIGHT BY@EXAMPLE
+    .logo-line
+      i.fa.fa-facebook.copy-icon(aria-hidden='true')
+      i#twitter.fa.fa-twitter.copy-icon(aria-hidden='true')
+      i.fa.fa-behance.copy-icon(aria-hidden='true')
+      i.fa.fa-linkedin-square.copy-icon(aria-hidden='true')
+      i.fa.fa-youtube-play.copy-icon(aria-hidden='true')
+  script(src='js/vendor/modernizr-3.11.2.min.js')
+  script(src='js/plugins.js')
+  script(src='js/main.js')

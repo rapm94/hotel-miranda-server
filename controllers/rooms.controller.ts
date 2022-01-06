@@ -4,6 +4,15 @@ let { Room } = require('../models/room.schema');
 import { Request, Response } from 'express';
 
 const roomsController = {
+    createRoom: async (req: Request, res: Response) => {
+        try {
+            let room = new Room(req.body);
+            await room.save();
+            res.status(200).send(room);
+        } catch (err) {
+            res.status(400).send(err);
+        }
+    },
     getAllRooms: async (req:Request, res:Response) => {
         try {
             let rooms = await Room.find();

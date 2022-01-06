@@ -1,6 +1,6 @@
 "use strict";
 const jwt = require('jsonwebtoken');
-const generateJWT = (uid) => {
+var generateJWT = (uid) => {
     return new Promise((resolve, reject) => {
         jwt.sign({ uid }, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
             if (err)
