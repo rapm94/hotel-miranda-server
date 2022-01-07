@@ -11,19 +11,11 @@ let mongoose = require('mongoose')
 require('dotenv').config()
 require('./auth/auth')
 
-async function dbConnection() {
-  try {
-    await mongoose.connect(process.env.DB_CNN, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
-    console.log('Connected to database')
-  } catch (err) {
-    console.log(err)
-  }
-}
+//DB Connection
 
-dbConnection()
+require("./db/mongo.config").dbConnection();
+
+
 
 let webRouter = require('./routes/web.route')
 let apiRouter = require('./routes/api.route')

@@ -1,7 +1,7 @@
 export {}
 import { Router, Request, Response } from 'express'
 const express = require('express')
-const router = express.Router()
+const router:Router = express.Router()
 let  roomsController  = require('../controllers/rooms.controller')
 let  bookingController  = require('../controllers/bookings.controller')
 let  reviewController  = require('../controllers/review.controller')

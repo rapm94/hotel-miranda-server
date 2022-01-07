@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-let { Booking } = require('../models/booking.schema');
+let  Booking  = require('../models/booking.schema');
 
 const bookingController = {
     getAllBookings: async (req: Request, res: Response) => {

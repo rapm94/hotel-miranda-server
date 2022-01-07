@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-let { Booking } = require('../models/booking.schema');
+let Booking = require('../models/booking.schema');
 const bookingController = {
     getAllBookings: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
