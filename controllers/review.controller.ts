@@ -1,6 +1,6 @@
 export{}
 import { Request, Response } from 'express';
-let { Review } = require('../models/review.schema');
+let  Review  = require('../models/review.schema');
 
 
 const reviewController = {
@@ -26,7 +26,7 @@ const reviewController = {
     },
     createReview: async (req: Request, res: Response) => {
         try {
-            let review = new Review(req.body);
+            const review = new Review(req.body);
             await review.save();
             res.status(201).json(review);
         } catch (err) {

@@ -54,7 +54,7 @@ passport.use(new JWTStrategy({
     secretOrKey: process.env.JWT_SECRET
 }, (jwtPayload, done) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield User.findById(jwtPayload._id);
+        const user = yield User.findById(jwtPayload.uid);
         if (!user) {
             return done(null, false);
         }

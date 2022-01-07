@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-let { Room } = require('../models/room.schema');
+let Room = require('../models/room.schema');
 const roomsController = {
     createRoom: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {

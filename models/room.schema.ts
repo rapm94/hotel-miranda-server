@@ -3,11 +3,6 @@ const Schema = mongoose.Schema;
 import { RoomI } from "../types/rooms.types";
 
 const roomSchema:RoomI = new Schema({
-    id: {
-        type: String,
-        required: true,
-        unique: true
-    },
     name: {
         type: String,
         required: true
@@ -26,7 +21,6 @@ const roomSchema:RoomI = new Schema({
     },
     facilities: {
         type: [String],
-        required: true
     },
     offerPrice: {
         type: Number,

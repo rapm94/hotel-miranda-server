@@ -9,28 +9,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express = require("express");
-const passport = require("passport");
-const jwt = require("jsonwebtoken");
+const express = require('express');
+const passport = require('passport');
+const generateJWT = require('../helpers/generateJWT');
 const router = express.Router();
-router.post("/signup", passport.authenticate("signup", { session: false }), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/signup', passport.authenticate('signup', { session: false }), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     res.json({
-        message: "Signup successful",
+        message: 'Signup successful',
         user: req.user,
     });
 }));
-router.post("/login", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    passport.authenticate("login", (err, user) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/login', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    passport.authenticate('login', (err, user) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             if (err || !user) {
-                const error = new Error("An error occurred.");
+                const error = new Error('An error occurred.');
                 return next(error);
             }
             req.login(user, { session: false }, (error) => __awaiter(void 0, void 0, void 0, function* () {
                 if (error)
                     return next(error);
                 const body = { _id: user._id, email: user.email };
-                const token = jwt.sign({ user: body }, "TOP_SECRET");
+                const token = yield generateJWT(body._id);
                 return res.json({ token });
             }));
         }
@@ -39,4 +39,11 @@ router.post("/login", (req, res, next) => __awaiter(void 0, void 0, void 0, func
         }
     }))(req, res, next);
 }));
+let logout = (req, res, next) => {
+    req.logout();
+    res.sendStatus(200);
+};
+router.post('/logout', logout, function (req, res, next) {
+    next();
+});
 module.exports = router;

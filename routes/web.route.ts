@@ -9,7 +9,7 @@ router.get('/', (req: Request, res: Response) => {
 })
 
 router.get('/about', (req: Request, res: Response) => {
-  res.render('about-us', {
+  res.render('about', {
     title: 'About',
   })
 })

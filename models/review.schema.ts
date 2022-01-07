@@ -3,11 +3,6 @@ const Schema = mongoose.Schema;
 import { ReviewI } from "../types/reviews.types";
 
 const reviewSchema:ReviewI = new Schema({
-    id: {
-        type: String,
-        required: true,
-        unique: true
-    },
     date: {
         type: Date,
         required: true

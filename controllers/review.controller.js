@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-let { Review } = require('../models/review.schema');
+let Review = require('../models/review.schema');
 const reviewController = {
     getAllReviews: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
@@ -35,7 +35,7 @@ const reviewController = {
     }),
     createReview: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            let review = new Review(req.body);
+            const review = new Review(req.body);
             yield review.save();
             res.status(201).json(review);
         }

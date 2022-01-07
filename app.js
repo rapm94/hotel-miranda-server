@@ -22,8 +22,8 @@ let logger = require('morgan');
 let createError = require('http-errors');
 let cors = require('cors');
 let mongoose = require('mongoose');
-require("dotenv").config();
-require("./auth/auth");
+require('dotenv').config();
+require('./auth/auth');
 function dbConnection() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -38,9 +38,8 @@ function dbConnection() {
         }
     });
 }
-;
 dbConnection();
-let webRouter = require("./routes/web.route");
+let webRouter = require('./routes/web.route');
 let apiRouter = require('./routes/api.route');
 let loginRouter = require('./routes/login.route');
 const app = (0, express_1.default)();
@@ -49,11 +48,13 @@ app.set('view engine', 'pug');
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use(express_1.default.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(passport.initialize());
 app.use(cookieParser());
 app.use(logger('dev'));
-app.use("/", webRouter);
-app.use("/api", passport.authenticate("jwt", { session: false }), apiRouter);
-app.use("/login", loginRouter);
+app.use('/', webRouter);
+app.use('/api', passport.authenticate('jwt', { session: false }), apiRouter);
+app.use('/auth', loginRouter);
 app.use(function (req, res, next) {
     next(createError(404));
 });

@@ -1,0 +1,121 @@
+.hotel-miranda-logo {
+  display: none;
+}
+
+.header {
+  margin: none;
+}
+
+.header .header-bar {
+  background-color: #222222;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 80px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header .header-bar .hotel-miranda-title {
+  width: 50%;
+  padding-top: 12px;
+  margin-left: 30px;
+  letter-spacing: 2.6px;
+  color: #111111;
+  font-size: 20px;
+  opacity: 1;
+  color: white;
+}
+
+.header .header-bar .hotel-miranda-title .hotel-bold {
+  font-weight: bold;
+  color: white;
+}
+
+.header .header-bar .burger {
+  margin-right: 25px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+.header .drop-down-box {
+  display: none;
+  width: 90%;
+  background-color: #f7f9fa;
+  position: absolute;
+  right: 0px;
+  z-index: 0;
+  text-align: right;
+  /*@keyframes displayMenu {
+          0% {
+            top: 0;
+          }
+          100% {
+            top: 70px;
+          }
+        }*/
+}
+
+.header .drop-down-box .drop-down-list {
+  list-style-type: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding: 15px 20px;
+  color: white;
+}
+
+.header .drop-down-box .drop-down-list .drop-down-element {
+  padding: 10px;
+  background: #c4bdaf no-repeat fixed center;
+  color: white;
+  padding-right: 40px;
+  font-family: "Archivo", sans-serif;
+  letter-spacing: 1.5px;
+}
+
+.header .drop-down-box .drop-down-list .space {
+  height: 10px;
+}
+
+.header .drop-down-box .contact-and-icon {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 0px 20px;
+  font-size: 30px;
+  color: #222222;
+}
+
+.header .drop-down-box .contact-and-icon .contact-text {
+  display: none;
+}
+
+.header .drop-down-box .contact-and-icon .drop-down-contact {
+  color: #222222;
+  padding: 5px 20px;
+  font-size: 18px;
+  font-family: "Archivo", sans-serif;
+  letter-spacing: 1.5px;
+}
+
+.header .drop-down-box .contact-and-icon .drop-down-icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+  color: #222222;
+}
+
+.header .drop-down-box--visible {
+  display: block;
+}
+/*# sourceMappingURL=nav-bar-mobile.css.map */

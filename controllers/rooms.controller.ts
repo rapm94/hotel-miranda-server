@@ -1,6 +1,6 @@
 
 export{}
-let { Room } = require('../models/room.schema');
+let  Room  = require('../models/room.schema');
 import { Request, Response } from 'express';
 
 const roomsController = {

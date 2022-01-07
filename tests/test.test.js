@@ -12,7 +12,7 @@ const app = require("../app");
 const mongoose = require("mongoose");
 const supertest = require("supertest");
 beforeEach((done) => {
-    mongoose.connect("mongodb://localhost:27017/JestDB", { useNewUrlParser: true, useUnifiedTopology: true }, () => done());
+    mongoose.connect(process.env.DB_CNN, { useNewUrlParser: true, useUnifiedTopology: true }, () => done());
 });
 afterEach((done) => {
     mongoose.connection.db.dropDatabase(() => {

@@ -46,7 +46,7 @@ passport.use("signup", new localStrategy({
         secretOrKey: process.env.JWT_SECRET
     }, async (jwtPayload:any, done:any) => {
         try {
-            const user = await User.findById(jwtPayload._id);
+            const user = await User.findById(jwtPayload.uid);
             if (!user) {
                 return done(null, false);
             }

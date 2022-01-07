@@ -3,11 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const roomSchema = new Schema({
-    id: {
-        type: String,
-        required: true,
-        unique: true
-    },
     name: {
         type: String,
         required: true
@@ -26,7 +21,6 @@ const roomSchema = new Schema({
     },
     facilities: {
         type: [String],
-        required: true
     },
     offerPrice: {
         type: Number,

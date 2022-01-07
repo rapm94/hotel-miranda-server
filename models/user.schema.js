@@ -13,39 +13,36 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 let bcrypt = require('bcrypt');
 const userSchema = new Schema({
-    id: {
+    email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
     },
     name: {
         type: String,
-        required: true
     },
     startDate: {
         type: Date,
-        required: true
     },
     jobDescription: {
         type: String,
-        required: true
     },
     phoneNumber: {
         type: String,
-        required: true
     },
     status: {
         type: Boolean,
-        required: true
     },
     jwt: {
         type: String,
-        required: true
-    }
+    },
 });
-userSchema.pre("save", function (next) {
+userSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const user = this;
         const hash = yield bcrypt.hash(this.password, 10);
         this.password = hash;
         next();
