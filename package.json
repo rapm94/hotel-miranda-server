@@ -12,6 +12,7 @@
   "author": "Raul Puigbo",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^3.7.0",
     "@types/body-parser": "^1.19.2",
     "@types/cookie-parser": "^1.4.2",
     "@types/express-session": "^1.17.4",
@@ -31,8 +32,10 @@
     "express": "^4.17.2",
     "express-session": "^1.17.2",
     "express-validator": "^6.14.0",
+    "hapi": "^18.1.0",
     "http-errors": "^2.0.0",
     "jest": "^27.4.7",
+    "joi": "^17.5.0",
     "mailjs": "^0.1.18",
     "mongoose": "^6.1.5",
     "morgan": "^1.10.0",
