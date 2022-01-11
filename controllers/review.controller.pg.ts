@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-const { PrismaClient } = require('@prisma/client');
+import  {PrismaClient}  from '@prisma/client';
 
 
 const prisma = new PrismaClient();
@@ -13,6 +13,7 @@ const ReviewControllerPg = {
             res.status(500).json({
                 message: (err as Error).message
             });
+            console.log(err);
         }
     },
     getReviewById: async (req: Request, res: Response) => {
@@ -25,8 +26,9 @@ const ReviewControllerPg = {
             res.status(200).json(review);
         } catch (err) {
             res.status(500).json({
-                message: ( err as Error).message
+                message: (err as Error).message
             });
+            console.log(err);
         }
     },
     createReview: async (req: Request, res: Response) => {
@@ -71,3 +73,5 @@ const ReviewControllerPg = {
         }
     }
 };
+
+module.exports = ReviewControllerPg;

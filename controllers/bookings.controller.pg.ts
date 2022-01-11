@@ -19,12 +19,15 @@ const BookingsControllerPg = {
             let booking = await prisma.booking.findOne({
                 where: {
                     id: req.params.id
+                },
+                include: {
+                    room: true
                 }
             });
             res.status(200).json(booking);
         } catch (err) {
             res.status(500).json({
-                message: ( err as Error).message
+                message: (err as Error).message
             });
         }
     },
@@ -83,7 +86,28 @@ const BookingsControllerPg = {
                 message: ( err as Error).message
             });
         }
+    },
+    addARoomToABooking: async (req: Request, res: Response) => {
+        try {
+            let booking = await prisma.booking.update({
+                where: {
+                    id: req.params.id
+                },
+                data: {
+                    rooms: {
+                        connect: {
+                            id: req.params.roomId
+                        }
+                    }
+                }
+            });
+            res.status(200).json(booking);
+        } catch (err) {
+            res.status(500).json({
+                message: ( err as Error).message
+            });
+        }
     }
 };
 
-exports.module = BookingsControllerPg;
+module.exports = BookingsControllerPg;

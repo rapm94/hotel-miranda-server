@@ -71,4 +71,4 @@ const RoomsControllerPg = {
     }
 };
 
-exports.module = RoomsControllerPg; 
+module.exports = RoomsControllerPg; 

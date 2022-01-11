@@ -2,10 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require('express');
 const router = express.Router();
-let roomsController = require('../controllers/rooms.controller');
-let bookingController = require('../controllers/bookings.controller');
-let reviewController = require('../controllers/review.controller');
-let userController = require('../controllers/user.controller');
+//let  roomsController  = require('../controllers/rooms.controller')
+//let  bookingController  = require('../controllers/bookings.controller')
+//let  reviewController  = require('../controllers/review.controller')
+//let  userController  = require('../controllers/user.controller')
+let RoomsControllerPg = require('../controllers/rooms.controller.pg');
+let BookingsControllerPg = require('../controllers/bookings.controller.pg');
+let ReviewControllerPg = require('../controllers/review.controller.pg');
+let UserControllerPg = require('../controllers/user.controller.pg');
 router.get('/', (req, res) => {
     res.json({
         message: 'Welcome to the API',
@@ -16,38 +20,38 @@ router.get('/', (req, res) => {
 //Rooms route
 router
     .route('/rooms')
-    .get(roomsController.getAllRooms)
-    .post(roomsController.createRoom);
+    .get(RoomsControllerPg.getAllRooms)
+    .post(RoomsControllerPg.createRoom);
 router
     .route('/rooms/:id')
-    .get(roomsController.getRoomById)
-    .put(roomsController.updateRoom)
-    .delete(roomsController.deleteRoom);
+    .get(RoomsControllerPg.getRoomById)
+    .put(RoomsControllerPg.updateRoom)
+    .delete(RoomsControllerPg.deleteRoom);
 //reviews route
 router
     .route('/reviews')
-    .post(reviewController.createReview)
-    .get(reviewController.getAllReviews);
+    .post(ReviewControllerPg.createReview)
+    .get(ReviewControllerPg.getAllReviews);
 router
     .route('/reviews/:id')
-    .get(reviewController.getReviewById)
-    .delete(reviewController.deleteReview);
+    .get(ReviewControllerPg.getReviewById)
+    .delete(ReviewControllerPg.deleteReview);
 router
     .route('/users')
-    .get(userController.getAllUsers)
-    .post(userController.createUser);
+    .get(UserControllerPg.getAllUsers)
+    .post(UserControllerPg.createUser);
 router
     .route('/users/:id')
-    .get(userController.getUserById)
-    .put(userController.updateUser)
-    .delete(userController.deleteUser);
+    .get(UserControllerPg.getUserById)
+    .put(UserControllerPg.updateUser)
+    .delete(UserControllerPg.deleteUser);
 router
     .route('/bookings')
-    .get(bookingController.getAllBookings)
-    .post(bookingController.createBooking);
+    .get(BookingsControllerPg.getAllBookings)
+    .post(BookingsControllerPg.createBooking);
 router
     .route('/bookings/:id')
-    .get(bookingController.getBookingById)
-    .put(bookingController.updateBooking)
-    .delete(bookingController.deleteBooking);
+    .get(BookingsControllerPg.getBookingById)
+    .put(BookingsControllerPg.updateBooking)
+    .delete(BookingsControllerPg.deleteBooking);
 module.exports = router;

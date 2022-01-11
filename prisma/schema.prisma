@@ -1,17 +1,51 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
+model Booking {
+  id        String        @id @default(cuid())
+  roomId    Int           @unique
+  name      String
+  email     String        @unique
+  phone     String
+  checkIn   DateTime
+  checkOut  DateTime?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime?     @updatedAt
+  status    BookingStatus @default(INPROGRESS)
+  room      Room          @relation(fields: [roomId], references: [id])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  subget    String
+  message   String
+  createdAt DateTime @default(now())
+  rating    Int
+}
+
+model Room {
+  id         Int      @id @default(autoincrement())
+  name       String
+  price      Int
+  status     Boolean
+  facilities String[]
+  bedType    String
+  offerPrice Int?
+  Booking    Booking?
+
 }
 
 model User {
-  id             String   @id @unique @default(cuid())
+  id             String   @id @default(cuid())
   name           String
   email          String   @unique
   password       String
@@ -20,56 +54,16 @@ model User {
   jobDescription String
   phone          String
   status         Boolean
-  jwtToken       String
   role           Role     @default(USER)
-}
-
-model Booking {
-  id         String        @id @unique @default(cuid())
-  guest      String
-  roomNumber String
-  name       String
-  email      String        @unique
-  phone      String
-  checkIn    DateTime
-  checkOut   DateTime
-  createdAt  DateTime      @default(now())
-  updatedAt  DateTime?     @updatedAt
-  room       Room          @relation(fields: [roomId], references: [id])
-  status     BookingStatus @default(INPROGRESS)
-  roomId     String
-}
-
-model Review {
-  id        String   @id @unique @default(cuid())
-  name      String
-  email     String
-  phone     String
-  message   String
-  createdAt DateTime @default(now())
-  rating    Int
-  photo     String?
-}
-
-model Room {
-  id         String   @id @unique @default(cuid())
-  name       String
-  price      Int
-  roomNumber Int      @unique @default(autoincrement())
-  status     Boolean
-  facilities String[]
-  bedType    String
-  offerPrice Int
-  booking    Booking? 
-}
-
-enum Role {
-  ADMIN
-  USER
 }
 
 enum BookingStatus {
   CHECKIN
   CHECKOUT
   INPROGRESS
+}
+
+enum Role {
+  ADMIN
+  USER
 }

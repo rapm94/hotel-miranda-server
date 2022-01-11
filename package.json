@@ -1,12 +1,15 @@
 {
   "name": "hotel-miranda-server",
   "version": "1.0.0",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "description": "Server for miranda web app and web page",
   "main": "index.js",
   "scripts": {
     "start": "ts-node index.ts",
     "dev": "nodemon index.ts",
-    "dev2": "nodemon ./bin/www",
+    "dev2": "tsc --watch nodemon  ./bin/www",
     "test": "jest"
   },
   "author": "Raul Puigbo",
@@ -28,6 +31,7 @@
     "cookie-parser": "^1.4.6",
     "corepack": "^0.10.0",
     "cors": "^2.8.5",
+    "cuid": "^2.1.8",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "express-session": "^1.17.2",

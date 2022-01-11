@@ -71,4 +71,4 @@ const UserControllerPg = {
     }
 };
 
-exports.module = UserControllerPg;
+module.exports = UserControllerPg;
