@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const { PrismaClient } = require('@prisma/client');
+const { roomSchema } = require('../helpers/validate.schema');
 const prisma = new PrismaClient();
 const RoomsControllerPg = {
     getAllRooms: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -21,6 +22,9 @@ const RoomsControllerPg = {
             res.status(500).json({
                 message: err.message
             });
+        }
+        finally {
+            yield prisma.$disconnect();
         }
     }),
     getRoomById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -37,9 +41,13 @@ const RoomsControllerPg = {
                 message: err.message
             });
         }
+        finally {
+            yield prisma.$disconnect();
+        }
     }),
     createRoom: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
+            const validRoom = yield roomSchema.validateAsync(req.body);
             let room = yield prisma.room.create({
                 data: req.body
             });
@@ -50,14 +58,18 @@ const RoomsControllerPg = {
                 message: err.message
             });
         }
+        finally {
+            yield prisma.$disconnect();
+        }
     }),
     updateRoom: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
+            const validRoom = yield roomSchema.validateAsync(req.body);
             let room = yield prisma.room.update({
                 where: {
                     id: req.params.id
                 },
-                data: req.body
+                data: validRoom
             });
             res.status(200).json(room);
         }
@@ -65,6 +77,9 @@ const RoomsControllerPg = {
             res.status(500).json({
                 message: err.message
             });
+        }
+        finally {
+            yield prisma.$disconnect();
         }
     }),
     deleteRoom: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -80,6 +95,9 @@ const RoomsControllerPg = {
             res.status(500).json({
                 message: err.message
             });
+        }
+        finally {
+            yield prisma.$disconnect();
         }
     })
 };

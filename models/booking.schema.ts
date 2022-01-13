@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-import { BookingI } from "../types/bookings.types";
+import { BookingI } from "../types/bookings.interface";
 
 const bookingSchema:BookingI = new Schema({
     userId: {

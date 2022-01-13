@@ -1,7 +1,7 @@
 let mongoose = require('mongoose')
 let Schema = mongoose.Schema
 let bcrypt = require('bcrypt')
-import { UserI } from '../types/user.types'
+import { UserI } from '../types/user.interface'
 
 const userSchema = new Schema({
   email: {

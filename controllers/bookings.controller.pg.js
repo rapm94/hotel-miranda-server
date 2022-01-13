@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const { PrismaClient } = require('@prisma/client');
+const { bookingSchema } = require('../helpers/validate.schema');
 const prisma = new PrismaClient();
 const BookingsControllerPg = {
     getAllBookings: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -21,6 +22,9 @@ const BookingsControllerPg = {
             res.status(500).json({
                 message: err.message,
             });
+        }
+        finally {
+            yield prisma.$disconnect();
         }
     }),
     getBookingById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -40,11 +44,15 @@ const BookingsControllerPg = {
                 message: err.message,
             });
         }
+        finally {
+            yield prisma.$disconnect();
+        }
     }),
     createBooking: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
+            const validBooking = yield bookingSchema.validateAsync(req.body);
             let booking = yield prisma.booking.create({
-                data: req.body,
+                data: validBooking,
             });
             res.status(201).json(booking);
         }
@@ -53,14 +61,18 @@ const BookingsControllerPg = {
                 message: err.message,
             });
         }
+        finally {
+            yield prisma.$disconnect();
+        }
     }),
     updateBooking: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
+            const validBooking = yield bookingSchema.validateAsync(req.body);
             let booking = yield prisma.booking.update({
                 where: {
                     id: req.params.id,
                 },
-                data: req.body,
+                data: validBooking,
             });
             res.status(200).json(booking);
         }
@@ -68,6 +80,9 @@ const BookingsControllerPg = {
             res.status(500).json({
                 message: err.message,
             });
+        }
+        finally {
+            yield prisma.$disconnect();
         }
     }),
     deleteBooking: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -84,6 +99,9 @@ const BookingsControllerPg = {
                 message: err.message,
             });
         }
+        finally {
+            yield prisma.$disconnect();
+        }
     }),
     // inner join query to get all rooms for a booking
     getBookingRooms: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -99,6 +117,9 @@ const BookingsControllerPg = {
             res.status(500).json({
                 message: err.message,
             });
+        }
+        finally {
+            yield prisma.$disconnect();
         }
     }),
     addARoomToABooking: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -121,6 +142,9 @@ const BookingsControllerPg = {
             res.status(500).json({
                 message: err.message,
             });
+        }
+        finally {
+            yield prisma.$disconnect();
         }
     }),
 };

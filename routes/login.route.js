@@ -13,12 +13,17 @@ const express = require('express');
 const passport = require('passport');
 const generateJWT = require('../helpers/generateJWT');
 const router = express.Router();
-router.post('/signup', passport.authenticate('signup', { session: false }), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+/* router.post(
+  '/signup',
+  passport.authenticate('signup', { session: false }),
+  async (req: Request, res: Response, next: NextFunction) => {
+
     res.json({
-        message: 'Signup successful',
-        user: req.user,
-    });
-}));
+      message: 'Signup successful',
+      user: req.user,
+    })
+  },
+) */
 router.post('/login', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     passport.authenticate('login', (err, user) => __awaiter(void 0, void 0, void 0, function* () {
         try {

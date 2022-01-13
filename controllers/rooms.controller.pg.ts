@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 const { PrismaClient } = require('@prisma/client');
+const { roomSchema } = require('../helpers/validate.schema');
 
 const prisma = new PrismaClient();
 
@@ -34,6 +35,7 @@ const RoomsControllerPg = {
     },
     createRoom: async (req: Request, res: Response) => {
         try {
+            const validRoom = await roomSchema.validateAsync(req.body);
             let room = await prisma.room.create({
                 data: req.body
             });
@@ -48,11 +50,12 @@ const RoomsControllerPg = {
     },
     updateRoom: async (req: Request, res: Response) => {
         try {
+            const validRoom = await roomSchema.validateAsync(req.body);
             let room = await prisma.room.update({
                 where: {
                     id: req.params.id
                 },
-                data: req.body
+                data: validRoom
             });
             res.status(200).json(room);
         } catch (err) {

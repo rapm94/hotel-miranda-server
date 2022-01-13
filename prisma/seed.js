@@ -37,7 +37,7 @@ function main() {
             });
         }
         for (const booking of bookings_1.bookingsData) {
-            yield prisma.booking.createMany({
+            yield prisma.booking.create({
                 data: booking
             });
         }
