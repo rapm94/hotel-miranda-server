@@ -34,11 +34,10 @@ const reviewSchema:typeof ReviewI = joi.object().keys({
 
 const roomSchema:typeof RoomI = joi.object().keys({
     name: joi.string().required(),
-    roomNumber: joi.number().required(),
     price: joi.number().required(),
     bedType: joi.string().required(),
     facilities: joi.array().required(),
-    offerPrice: joi.number().required(),
+    offerPrice: joi.number(),
     status: joi.boolean().required(),
 });
 
