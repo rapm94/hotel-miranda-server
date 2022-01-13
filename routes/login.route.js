@@ -32,10 +32,11 @@ router.post('/login', (req, res, next) => __awaiter(void 0, void 0, void 0, func
                 return next(error);
             }
             req.login(user, { session: false }, (error) => __awaiter(void 0, void 0, void 0, function* () {
-                if (error)
+                if (error) {
                     return next(error);
+                }
                 const body = { _id: user._id, email: user.email };
-                const token = yield generateJWT(body._id);
+                const token = yield generateJWT(body);
                 return res.json({ token });
             }));
         }

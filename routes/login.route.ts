@@ -29,14 +29,17 @@ router.post(
           return next(error)
         }
 
-        req.login(user, { session: false }, async (error) => {
-          if (error) return next(error)
+        req.login(user, { session: false }, async (error: any) => {
+          if (error) {
+            return next(error)
+          }
 
           const body = { _id: user._id, email: user.email }
-          const token = await generateJWT(body._id)
+          const token = await generateJWT(body)
 
-          return res.json({ token });
-        })
+          return res.json({ token })
+        }
+        )
       } catch (error) {
         return next(error);
       }
