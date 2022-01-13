@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const client_1 = require("@prisma/client");
+const prisma = new client_1.PrismaClient();
 const ReviewControllerPg = {
     getAllReviews: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
@@ -19,36 +19,37 @@ const ReviewControllerPg = {
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
             console.log(err);
         }
     }),
     getReviewById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            let review = yield prisma.review.findOne({
+            let review = yield prisma.review.findUnique({
                 where: {
-                    id: req.params.id
-                }
+                    id: req.params.id,
+                },
             });
             res.status(200).json(review);
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
+            console.log(err);
         }
     }),
     createReview: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             let review = yield prisma.review.create({
-                data: req.body
+                data: req.body,
             });
             res.status(201).json(review);
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
         }
     }),
@@ -56,15 +57,15 @@ const ReviewControllerPg = {
         try {
             let review = yield prisma.review.update({
                 where: {
-                    id: req.params.id
+                    id: req.params.id,
                 },
-                data: req.body
+                data: req.body,
             });
             res.status(200).json(review);
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
         }
     }),
@@ -72,16 +73,16 @@ const ReviewControllerPg = {
         try {
             let review = yield prisma.review.delete({
                 where: {
-                    id: req.params.id
-                }
+                    id: req.params.id,
+                },
             });
             res.status(200).json(review);
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
         }
-    })
+    }),
 };
 module.exports = ReviewControllerPg;

@@ -25,7 +25,7 @@ const RoomsControllerPg = {
     }),
     getRoomById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            let room = yield prisma.room.findOne({
+            let room = yield prisma.room.findUnique({
                 where: {
                     id: req.params.id
                 }

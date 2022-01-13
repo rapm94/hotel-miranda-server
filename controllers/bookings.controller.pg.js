@@ -19,39 +19,38 @@ const BookingsControllerPg = {
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
         }
     }),
-    // getBookingById and room associations
     getBookingById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            let booking = yield prisma.booking.findOne({
+            let booking = yield prisma.booking.findUnique({
                 where: {
-                    id: req.params.id
+                    id: req.params.id,
                 },
                 include: {
-                    room: true
-                }
+                    room: true,
+                },
             });
             res.status(200).json(booking);
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
         }
     }),
     createBooking: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             let booking = yield prisma.booking.create({
-                data: req.body
+                data: req.body,
             });
             res.status(201).json(booking);
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
         }
     }),
@@ -59,15 +58,15 @@ const BookingsControllerPg = {
         try {
             let booking = yield prisma.booking.update({
                 where: {
-                    id: req.params.id
+                    id: req.params.id,
                 },
-                data: req.body
+                data: req.body,
             });
             res.status(200).json(booking);
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
         }
     }),
@@ -75,14 +74,14 @@ const BookingsControllerPg = {
         try {
             let booking = yield prisma.booking.delete({
                 where: {
-                    id: req.params.id
-                }
+                    id: req.params.id,
+                },
             });
             res.status(200).json(booking);
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
         }
     }),
@@ -91,14 +90,14 @@ const BookingsControllerPg = {
         try {
             let bookingRooms = yield prisma.booking.findMany({
                 include: {
-                    rooms: true
-                }
+                    rooms: true,
+                },
             });
             res.status(200).json(bookingRooms);
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
         }
     }),
@@ -106,23 +105,23 @@ const BookingsControllerPg = {
         try {
             let booking = yield prisma.booking.update({
                 where: {
-                    id: req.params.id
+                    id: req.params.id,
                 },
                 data: {
                     rooms: {
                         connect: {
-                            id: req.params.roomId
-                        }
-                    }
-                }
+                            id: req.params.roomId,
+                        },
+                    },
+                },
             });
             res.status(200).json(booking);
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
         }
-    })
+    }),
 };
 module.exports = BookingsControllerPg;

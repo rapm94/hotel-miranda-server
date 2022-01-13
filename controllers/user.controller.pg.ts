@@ -12,11 +12,13 @@ const UserControllerPg = {
             res.status(500).json({
                 message: (err as Error).message
             });
-        }
+        } finally {
+            await prisma.$disconnect()
+          }
     },
     getUserById: async (req: Request, res: Response) => {
         try {
-            let user = await prisma.user.findOne({
+            let user = await prisma.user.findUnique({
                 where: {
                     id: req.params.id
                 }
@@ -26,7 +28,9 @@ const UserControllerPg = {
             res.status(500).json({
                 message: ( err as Error).message
             });
-        }
+        } finally {
+            await prisma.$disconnect()
+          }
     },
     createUser: async (req: Request, res: Response) => {
         try {
@@ -38,7 +42,9 @@ const UserControllerPg = {
             res.status(500).json({
                 message: (err as Error).message
             });
-        }
+        } finally {
+            await prisma.$disconnect()
+          }
     },
     updateUser: async (req: Request, res: Response) => {
         try {
@@ -53,7 +59,9 @@ const UserControllerPg = {
             res.status(500).json({
                 message: ( err as Error).message
             });
-        }
+        } finally {
+            await prisma.$disconnect()
+          }
     },
     deleteUser: async (req: Request, res: Response) => {
         try {
@@ -67,7 +75,9 @@ const UserControllerPg = {
             res.status(500).json({
                 message: ( err as Error).message 
             });
-        }
+        } finally {
+            await prisma.$disconnect()
+          }
     }
 };
 

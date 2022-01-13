@@ -12,11 +12,13 @@ const RoomsControllerPg = {
             res.status(500).json({
                 message: (err as Error).message
             });
-        }
+        } finally {
+            await prisma.$disconnect()
+          }
     },
     getRoomById: async (req: Request, res: Response) => {
         try {
-            let room = await prisma.room.findOne({
+            let room = await prisma.room.findUnique({
                 where: {
                     id: req.params.id
                 }
@@ -26,7 +28,9 @@ const RoomsControllerPg = {
             res.status(500).json({
                 message: ( err as Error).message
             });
-        }
+        } finally {
+            await prisma.$disconnect()
+          }
     },
     createRoom: async (req: Request, res: Response) => {
         try {
@@ -38,7 +42,9 @@ const RoomsControllerPg = {
             res.status(500).json({
                 message: (err as Error).message
             });
-        }
+        } finally {
+            await prisma.$disconnect()
+          }
     },
     updateRoom: async (req: Request, res: Response) => {
         try {
@@ -53,7 +59,9 @@ const RoomsControllerPg = {
             res.status(500).json({
                 message: ( err as Error).message
             });
-        }
+        } finally {
+            await prisma.$disconnect()
+          }
     },
     deleteRoom: async (req: Request, res: Response) => {
         try {
@@ -67,7 +75,9 @@ const RoomsControllerPg = {
             res.status(500).json({
                 message: ( err as Error).message
             });
-        }
+        } finally {
+            await prisma.$disconnect()
+          }
     }
 };
 

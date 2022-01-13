@@ -9,7 +9,7 @@
   "scripts": {
     "start": "ts-node index.ts",
     "dev": "nodemon index.ts",
-    "dev2": "tsc --watch nodemon  ./bin/www",
+    "dev2": "nodemon  ./bin/www",
     "test": "jest"
   },
   "author": "Raul Puigbo",

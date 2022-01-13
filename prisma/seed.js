@@ -8,71 +8,55 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+Object.defineProperty(exports, "__esModule", { value: true });
+const client_1 = require("@prisma/client");
+const bookings_1 = require("./seedingData/bookings");
+const reviews_1 = require("./seedingData/reviews");
+const rooms_1 = require("./seedingData/rooms");
+const users_1 = require("./seedingData/users");
+const prisma = new client_1.PrismaClient();
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        for (user in users) {
-            yield prisma.user.create({
-                data: {
-                    name: user.name,
-                    email: user.email,
-                    password: user.password,
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                    jobDescription: user.jobDescription,
-                    phone: user.phone,
-                    status: user.status,
-                    role: user.role,
-                }
+        console.log('Seeding data...');
+        for (const review of reviews_1.reviewsData) {
+            yield prisma.review.upsert({
+                where: {
+                    id: review.id
+                },
+                create: review,
+                update: review
             });
         }
-        //loop through the rooms and create them in the database with the booking id
-        for (room in rooms) {
-            yield prisma.room.create({
-                data: {
-                    name: room.name,
-                    description: room.description,
-                    price: room.price,
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                    booking: {
-                        connect: {
-                            id: room.bookingId
-                        }
-                    }
-                }
+        for (const room of rooms_1.roomsData) {
+            yield prisma.room.upsert({
+                where: {
+                    id: room.id
+                },
+                create: room,
+                update: room
             });
         }
-        for (review in reviews) {
-            yield prisma.review.create({
-                data: {
-                    content: review.content,
-                    rating: review.rating,
-                    images: {
-                        create: review.images
-                    }
-                }
+        for (const booking of bookings_1.bookingsData) {
+            yield prisma.booking.createMany({
+                data: booking
             });
         }
-        ;
-        for (booking in bookings) {
-            yield prisma.booking.create({
-                data: {
-                    startDate: booking.startDate,
-                    endDate: booking.endDate,
-                    user: {
-                        connect: {
-                            id: booking.user
-                        }
-                    },
-                    room: {
-                        connect: {
-                            id: booking.room
-                        }
-                    }
-                }
+        for (const user of users_1.userData) {
+            yield prisma.user.upsert({
+                where: {
+                    id: user.id
+                },
+                create: user,
+                update: user
             });
         }
     });
 }
+main()
+    .catch((e) => {
+    console.error(e);
+})
+    .finally(() => __awaiter(void 0, void 0, void 0, function* () {
+    yield prisma.$disconnect();
+    console.log('Done!');
+}));

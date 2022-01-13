@@ -1,7 +1,9 @@
 import { Prisma} from "@prisma/client"
+import  cuid  from 'cuid';
 
-export const roomsData: Prisma.RoomCreateInput[] = [
+export const roomsData = [
     {
+      id: cuid(),
       name: "Alley",
       price: 285,
       status: false,
@@ -13,7 +15,7 @@ export const roomsData: Prisma.RoomCreateInput[] = [
       bedType: "King",
       offerPrice: null
     },
-    {
+    { id: cuid(),
       name: "Hill",
       price: 111,
       status: true,
@@ -26,6 +28,7 @@ export const roomsData: Prisma.RoomCreateInput[] = [
       offerPrice: 130
     },
     {
+      id: cuid(),
       name: "Terrace",
       price: 258,
       status: true,
@@ -38,6 +41,7 @@ export const roomsData: Prisma.RoomCreateInput[] = [
       offerPrice: 147
     },
     {
+      id: cuid(),
       name: "Center",
       price: 250,
       status: true,
@@ -50,6 +54,7 @@ export const roomsData: Prisma.RoomCreateInput[] = [
       offerPrice: 127
     },
     {
+      id: cuid(),
       name: "Crossing",
       price: 214,
       status: false,
@@ -62,6 +67,7 @@ export const roomsData: Prisma.RoomCreateInput[] = [
       offerPrice: null
     },
     {
+      id: cuid(),
       name: "Point",
       price: 131,
       status: true,
@@ -74,6 +80,7 @@ export const roomsData: Prisma.RoomCreateInput[] = [
       offerPrice: 54
     },
     {
+      id: cuid(),
       name: "Circle",
       price: 151,
       status: false,
@@ -86,6 +93,7 @@ export const roomsData: Prisma.RoomCreateInput[] = [
       offerPrice: 64
     },
     {
+      id: cuid(),
       name: "Drive",
       price: 295,
       status: true,
@@ -98,6 +106,7 @@ export const roomsData: Prisma.RoomCreateInput[] = [
       offerPrice: null
     },
     {
+      id: cuid(),
       name: "Circle",
       price: 244,
       status: true,
@@ -110,6 +119,7 @@ export const roomsData: Prisma.RoomCreateInput[] = [
       offerPrice: 104
     },
     {
+      id: cuid(),
       name: "Parkway",
       price: 127,
       status: true,

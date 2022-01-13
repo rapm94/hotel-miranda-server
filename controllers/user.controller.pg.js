@@ -25,7 +25,7 @@ const UserControllerPg = {
     }),
     getUserById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            let user = yield prisma.user.findOne({
+            let user = yield prisma.user.findUnique({
                 where: {
                     id: req.params.id
                 }
