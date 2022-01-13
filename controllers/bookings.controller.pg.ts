@@ -1,5 +1,6 @@
-import { Request, Response } from 'express'
+import { Request, Response } from 'express';
 const { PrismaClient } = require('@prisma/client')
+const {  bookingSchema } = require('../helpers/validate.schema')
 
 const prisma = new PrismaClient()
 
@@ -17,6 +18,7 @@ const BookingsControllerPg = {
     }
   },
   getBookingById: async (req: Request, res: Response) => {
+    
     try {
       let booking = await prisma.booking.findUnique({
         where: {
@@ -37,8 +39,9 @@ const BookingsControllerPg = {
   },
   createBooking: async (req: Request, res: Response) => {
     try {
+      const validBooking = await bookingSchema.validateAsync(req.body)
       let booking = await prisma.booking.create({
-        data: req.body,
+        data: validBooking,
       })
       res.status(201).json(booking)
     } catch (err) {
@@ -51,11 +54,12 @@ const BookingsControllerPg = {
   },
   updateBooking: async (req: Request, res: Response) => {
     try {
+      const validBooking = await bookingSchema.validateAsync(req.body)
       let booking = await prisma.booking.update({
         where: {
           id: req.params.id,
         },
-        data: req.body,
+        data: validBooking,
       })
       res.status(200).json(booking)
     } catch (err) {

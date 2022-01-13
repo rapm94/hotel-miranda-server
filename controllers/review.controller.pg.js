@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
+const { reviewSchema } = require('../helpers/validate.schema');
 const prisma = new client_1.PrismaClient();
 const ReviewControllerPg = {
     getAllReviews: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -22,6 +23,9 @@ const ReviewControllerPg = {
                 message: err.message,
             });
             console.log(err);
+        }
+        finally {
+            yield prisma.$disconnect();
         }
     }),
     getReviewById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -39,11 +43,15 @@ const ReviewControllerPg = {
             });
             console.log(err);
         }
+        finally {
+            yield prisma.$disconnect();
+        }
     }),
     createReview: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
+            const validReview = yield reviewSchema.validateAsync(req.body);
             let review = yield prisma.review.create({
-                data: req.body,
+                data: validReview,
             });
             res.status(201).json(review);
         }
@@ -52,14 +60,18 @@ const ReviewControllerPg = {
                 message: err.message,
             });
         }
+        finally {
+            yield prisma.$disconnect();
+        }
     }),
     updateReview: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
+            const validReview = yield reviewSchema.validateAsync(req.body);
             let review = yield prisma.review.update({
                 where: {
                     id: req.params.id,
                 },
-                data: req.body,
+                data: validReview,
             });
             res.status(200).json(review);
         }
@@ -67,6 +79,9 @@ const ReviewControllerPg = {
             res.status(500).json({
                 message: err.message,
             });
+        }
+        finally {
+            yield prisma.$disconnect();
         }
     }),
     deleteReview: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -82,6 +97,9 @@ const ReviewControllerPg = {
             res.status(500).json({
                 message: err.message,
             });
+        }
+        finally {
+            yield prisma.$disconnect();
         }
     }),
 };

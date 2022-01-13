@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-import { RoomI } from "../types/rooms.types";
+import { RoomI } from "../types/rooms.interface";
 
 const roomSchema:RoomI = new Schema({
     name: {

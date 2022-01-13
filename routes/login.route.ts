@@ -6,16 +6,17 @@ const generateJWT = require('../helpers/generateJWT')
 
 const router = express.Router()
 
-router.post(
+/* router.post(
   '/signup',
   passport.authenticate('signup', { session: false }),
   async (req: Request, res: Response, next: NextFunction) => {
+
     res.json({
       message: 'Signup successful',
       user: req.user,
     })
   },
-)
+) */
 
 router.post(
   '/login',

@@ -10,7 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const { PrismaClient } = require('@prisma/client');
+const bcrypt = require('bcrypt');
 const prisma = new PrismaClient();
+const { userSchema } = require('../helpers/validate.schema');
 const UserControllerPg = {
     getAllUsers: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
@@ -19,68 +21,87 @@ const UserControllerPg = {
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
+        }
+        finally {
+            yield prisma.$disconnect();
         }
     }),
     getUserById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             let user = yield prisma.user.findUnique({
                 where: {
-                    id: req.params.id
-                }
+                    id: req.params.id,
+                },
             });
             res.status(200).json(user);
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
+        }
+        finally {
+            yield prisma.$disconnect();
         }
     }),
     createUser: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
+            const validUser = yield userSchema.validateAsync(req.body);
+            const hashedPassword = yield bcrypt.hash(validUser.password, 10);
             let user = yield prisma.user.create({
-                data: req.body
+                data: Object.assign(Object.assign({}, validUser), { password: hashedPassword })
             });
             res.status(201).json(user);
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
+        }
+        finally {
+            yield prisma.$disconnect();
         }
     }),
     updateUser: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
+            const validUser = yield userSchema.validateAsync(req.body);
+            const hashedPassword = yield bcrypt.hash(validUser.password, 10);
             let user = yield prisma.user.update({
                 where: {
-                    id: req.params.id
+                    id: req.params.id,
                 },
-                data: req.body
+                data: Object.assign(Object.assign({}, validUser), { password: hashedPassword }),
             });
             res.status(200).json(user);
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
+        }
+        finally {
+            yield prisma.$disconnect();
         }
     }),
     deleteUser: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             let user = yield prisma.user.delete({
                 where: {
-                    id: req.params.id
-                }
+                    id: req.params.id,
+                },
             });
             res.status(200).json(user);
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
         }
-    })
+        finally {
+            yield prisma.$disconnect();
+        }
+    }),
 };
 module.exports = UserControllerPg;

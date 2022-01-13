@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { PrismaClient } from '@prisma/client'
+const { reviewSchema } = require('../helpers/validate.schema')
 
 const prisma = new PrismaClient()
 
@@ -36,8 +37,9 @@ const ReviewControllerPg = {
   },
   createReview: async (req: Request, res: Response) => {
     try {
+      const validReview = await reviewSchema.validateAsync(req.body)
       let review = await prisma.review.create({
-        data: req.body,
+        data: validReview,
       })
       res.status(201).json(review)
     } catch (err) {
@@ -50,11 +52,12 @@ const ReviewControllerPg = {
   },
   updateReview: async (req: Request, res: Response) => {
     try {
+      const validReview = await reviewSchema.validateAsync(req.body)
       let review = await prisma.review.update({
         where: {
           id: req.params.id,
         },
-        data: req.body,
+        data: validReview,
       })
       res.status(200).json(review)
     } catch (err) {
