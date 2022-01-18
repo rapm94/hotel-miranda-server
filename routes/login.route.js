@@ -13,30 +13,33 @@ const express = require('express');
 const passport = require('passport');
 const generateJWT = require('../helpers/generateJWT');
 const router = express.Router();
-router.post('/signup', passport.authenticate('signup', { session: false }), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+/* router.post(
+  '/signup',
+  passport.authenticate('signup', { session: false }),
+  async (req: Request, res: Response, next: NextFunction) => {
+
     res.json({
-        message: 'Signup successful',
-        user: req.user,
-    });
-}));
+      message: 'Signup successful',
+      user: req.user,
+    })
+  },
+) */
 router.post('/login', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    passport.authenticate('login', (err, user) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            if (err || !user) {
-                const error = new Error('An error occurred.');
-                return next(error);
-            }
-            req.login(user, { session: false }, (error) => __awaiter(void 0, void 0, void 0, function* () {
-                if (error)
-                    return next(error);
-                const body = { _id: user._id, email: user.email };
-                const token = yield generateJWT(body._id);
-                return res.json({ token });
-            }));
+    passport.authenticate('login', (err, user, info) => __awaiter(void 0, void 0, void 0, function* () {
+        if (err) {
+            return next(err);
         }
-        catch (error) {
-            return next(error);
+        if (!user) {
+            return res.status(401).json({
+                message: info.message,
+            });
         }
+        const token = yield generateJWT(user);
+        return res.status(200).json({
+            message: 'Login successful',
+            user,
+            token,
+        });
     }))(req, res, next);
 }));
 let logout = (req, res, next) => {

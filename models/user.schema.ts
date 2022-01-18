@@ -1,7 +1,7 @@
 let mongoose = require('mongoose')
 let Schema = mongoose.Schema
 let bcrypt = require('bcrypt')
-import { UserI } from '../types/user.types'
+import { UserI } from '../types/user.interface'
 
 const userSchema = new Schema({
   email: {
@@ -27,9 +27,6 @@ const userSchema = new Schema({
   },
   status: {
     type: Boolean,
-  },
-  jwt: {
-    type: String,
   },
 })
 userSchema.pre('save', async function (this: any, next: Function) {

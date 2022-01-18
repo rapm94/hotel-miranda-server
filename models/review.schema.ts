@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-import { ReviewI } from "../types/reviews.types";
+import { ReviewI } from "../types/reviews.interface";
 
 const reviewSchema:ReviewI = new Schema({
     date: {

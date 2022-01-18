@@ -39,7 +39,6 @@ model Room {
   facilities String[]
   bedType    String
   offerPrice Int?
-
   Booking Booking?
 
 }

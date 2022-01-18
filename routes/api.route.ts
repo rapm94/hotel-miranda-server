@@ -2,14 +2,11 @@ export {}
 import { Router, Request, Response } from 'express'
 const express = require('express')
 const router:Router = express.Router()
-//let  roomsController  = require('../controllers/rooms.controller')
-//let  bookingController  = require('../controllers/bookings.controller')
-//let  reviewController  = require('../controllers/review.controller')
-//let  userController  = require('../controllers/user.controller')
-let  RoomsControllerPg  = require('../controllers/rooms.controller.pg')
-let  BookingsControllerPg  = require('../controllers/bookings.controller.pg')
-let  ReviewControllerPg  = require('../controllers/review.controller.pg')
-let  UserControllerPg  = require('../controllers/user.controller.pg')
+let  roomsController  = require('../controllers/rooms.controller')
+let  bookingController  = require('../controllers/bookings.controller')
+let  reviewController  = require('../controllers/review.controller')
+let  userController  = require('../controllers/user.controller')
+
 
 router.get('/', (req: Request, res: Response) => {
   res.json({
@@ -21,42 +18,42 @@ router.get('/', (req: Request, res: Response) => {
 //Rooms route
 router
   .route('/rooms')
-  .get(RoomsControllerPg.getAllRooms)
-  .post(RoomsControllerPg.createRoom)
+  .get(roomsController.getAllRooms)
+  .post(roomsController.createRoom)
 
 router
   .route('/rooms/:id')
-  .get(RoomsControllerPg.getRoomById)
-  .put(RoomsControllerPg.updateRoom)
-  .delete(RoomsControllerPg.deleteRoom)
+  .get(roomsController.getRoomById)
+  .put(roomsController.updateRoom)
+  .delete(roomsController.deleteRoom)
 //reviews route
 router
   .route('/reviews')
-  .post(ReviewControllerPg.createReview)
-  .get(ReviewControllerPg.getAllReviews)
+  .post(reviewController.createReview)
+  .get(reviewController.getAllReviews)
 router
   .route('/reviews/:id')
-  .get(ReviewControllerPg.getReviewById)
-  .delete(ReviewControllerPg.deleteReview)
+  .get(reviewController.getReviewById)
+  .delete(reviewController.deleteReview)
 router
   .route('/users')
-  .get(UserControllerPg.getAllUsers)
-  .post(UserControllerPg.createUser)
+  .get(userController.getAllUsers)
+  .post(userController.createUser)
 router
   .route('/users/:id')
-  .get(UserControllerPg.getUserById)
-  .put(UserControllerPg.updateUser)
-  .delete(UserControllerPg.deleteUser)
+  .get(userController.getUserById)
+  .put(userController.updateUser)
+  .delete(userController.deleteUser)
 
 router
   .route('/bookings')
-  .get(BookingsControllerPg.getAllBookings)
-  .post(BookingsControllerPg.createBooking)
+  .get(bookingController.getAllBookings)
+  .post(bookingController.createBooking)
 router
   .route('/bookings/:id')
-  .get(BookingsControllerPg.getBookingById)
-  .put(BookingsControllerPg.updateBooking)
-  .delete(BookingsControllerPg.deleteBooking)
+  .get(bookingController.getBookingById)
+  .put(bookingController.updateBooking)
+  .delete(bookingController.deleteBooking)
 
 
 module.exports = router;

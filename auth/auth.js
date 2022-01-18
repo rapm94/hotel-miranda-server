@@ -9,39 +9,46 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const passport = require('passport');
-const localStrategy = require("passport-local").Strategy;
-const User = require("../models/user.schema");
+const localStrategy = require('passport-local').Strategy;
+const User = require('../models/user.schema');
 const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
-const MagicLinkStrategy = require('passport-magic-link').Strategy;
-passport.use("signup", new localStrategy({
-    usernameField: "email",
-    passwordField: "password",
-}, (email, password, done) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const user = yield User.findOne({ email: email });
+//const { PrismaClient} = require('@prisma/client')
+const bcrypt = require('bcrypt');
+//const prisma = new PrismaClient()
+/*  passport.use(
+  'signup',
+  new localStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'password',
+    },
+    async (email: string, password: string, done: any) => {
+      try {
+        const user = await User.findOne({ email: email })
         if (user) {
-            return done(null, false, { message: "User already exists" });
+          return done(null, false, { message: 'User already exists' })
         }
-        const newUser = yield User.create({ email, password });
-        return done(null, newUser);
-    }
-    catch (error) {
-        return done(error);
-    }
-})));
-passport.use("login", new localStrategy({
-    usernameField: "email",
-    passwordField: "password",
+        const newUser = await User.create({ email, password })
+        return done(null, newUser)
+      } catch (error) {
+        return done(error)
+      }
+    },
+  ),
+) */
+passport.use('login', new localStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
 }, (email, password, done) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield User.findOne({ email: email });
         if (!user) {
-            return done(null, false, { message: "User does not exist" });
+            return done(null, false, { message: 'User not found' });
         }
-        const isMatch = yield user.isValidPassword(password);
+        const isMatch = yield bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return done(null, false, { message: "Incorrect password" });
+            return done(null, false, { message: 'Incorrect password' });
         }
         return done(null, user);
     }
@@ -51,7 +58,7 @@ passport.use("login", new localStrategy({
 })));
 passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env.JWT_SECRET
+    secretOrKey: process.env.JWT_SECRET,
 }, (jwtPayload, done) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield User.findById(jwtPayload.uid);
@@ -64,3 +71,28 @@ passport.use(new JWTStrategy({
         return done(error);
     }
 })));
+/* passport.use(
+  new JWTStrategy(
+    {
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+      secretOrKey: process.env.JWT_SECRET,
+    },
+    async (jwtPayload: any, done: any) => {
+      try {
+        const user = await prisma.user.findUnique({
+          where: {
+            email: jwtPayload.uid.email,
+          },
+        })
+        if (!user) {
+          return done(null, false)
+        }
+        return done(null, user)
+      } catch (error) {
+        return done(error)
+      }finally{
+        prisma.$disconnect()
+      }
+    },
+  ),
+) */
