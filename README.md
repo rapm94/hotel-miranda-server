@@ -10,7 +10,7 @@ Aside from beign an api server, it also has a web interface. using [Pug](https:/
 
 ```bash	
 $ yarn
-$ yarn dev2
+$ yarn start
 ```
 
 ## Roadmap
