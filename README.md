@@ -20,4 +20,4 @@ But as soon as it is stable, it will be released.
 
 ## Lincense
 
-Property of Raúl Puigbó.
+This project is under [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
