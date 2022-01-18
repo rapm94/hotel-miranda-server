@@ -1,15 +1,13 @@
 export {}
 import { Router, Request, Response } from 'express'
 const express = require('express')
-const router:Router = express.Router()
-//let  roomsController  = require('../controllers/rooms.controller')
-//let  bookingController  = require('../controllers/bookings.controller')
-//let  reviewController  = require('../controllers/review.controller')
-//let  userController  = require('../controllers/user.controller')
 let  RoomsControllerPg  = require('../controllers/rooms.controller.pg')
 let  BookingsControllerPg  = require('../controllers/bookings.controller.pg')
 let  ReviewControllerPg  = require('../controllers/review.controller.pg')
 let  UserControllerPg  = require('../controllers/user.controller.pg')
+
+
+const router:Router = express.Router()
 
 router.get('/', (req: Request, res: Response) => {
   res.json({

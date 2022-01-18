@@ -1,15 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require('express');
-const router = express.Router();
-//let  roomsController  = require('../controllers/rooms.controller')
-//let  bookingController  = require('../controllers/bookings.controller')
-//let  reviewController  = require('../controllers/review.controller')
-//let  userController  = require('../controllers/user.controller')
 let RoomsControllerPg = require('../controllers/rooms.controller.pg');
 let BookingsControllerPg = require('../controllers/bookings.controller.pg');
 let ReviewControllerPg = require('../controllers/review.controller.pg');
 let UserControllerPg = require('../controllers/user.controller.pg');
+const router = express.Router();
 router.get('/', (req, res) => {
     res.json({
         message: 'Welcome to the API',

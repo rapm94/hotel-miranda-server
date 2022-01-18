@@ -15,8 +15,6 @@ let cors = require('cors');
 let mongoose = require('mongoose');
 require('dotenv').config();
 require('./auth/auth');
-//DB Connection
-require("./db/mongo.config").dbConnection();
 let webRouter = require('./routes/web.route');
 let apiRouter = require('./routes/api.route');
 let loginRouter = require('./routes/login.route');
