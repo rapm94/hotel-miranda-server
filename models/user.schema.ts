@@ -28,9 +28,6 @@ const userSchema = new Schema({
   status: {
     type: Boolean,
   },
-  jwt: {
-    type: String,
-  },
 })
 userSchema.pre('save', async function (this: any, next: Function) {
   const hash = await bcrypt.hash(this.password, 10)

@@ -37,9 +37,6 @@ const userSchema = new Schema({
     status: {
         type: Boolean,
     },
-    jwt: {
-        type: String,
-    },
 });
 userSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {

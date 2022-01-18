@@ -3,7 +3,6 @@ import { Request, Response, NextFunction } from 'express'
 const express = require('express')
 const passport = require('passport')
 const generateJWT = require('../helpers/generateJWT')
-
 const router = express.Router()
 
 /* router.post(
@@ -20,31 +19,24 @@ const router = express.Router()
 
 router.post(
   '/login',
-  async (req: Request, res: Response, next: NextFunction) => {
-    passport.authenticate('login', async (err: any, user: any) => {
-      try {
-        if (err || !user) {
-          const error = new Error('An error occurred.')
-
-          return next(error)
-        }
-
-        req.login(user, { session: false }, async (error: any) => {
-          if (error) {
-            return next(error)
-          }
-
-          const body = { _id: user._id, email: user.email }
-          const token = await generateJWT(body)
-
-          return res.json({ token })
-        }
-        )
-      } catch (error) {
-        return next(error);
-      }
-    })(req, res, next);
-  },
+async (req: Request, res: Response, next: NextFunction) => {
+  passport.authenticate('login', async (err: Error, user: any, info: any) => {
+    if (err) {
+      return next(err)
+    }
+    if (!user) {
+      return res.status(401).json({
+        message: info.message,
+      })
+    }
+    const token = await generateJWT(user)
+    return res.status(200).json({
+      message: 'Login successful',
+      user,
+      token,
+    })
+  })(req, res, next)
+},
 )
 
 let logout:Function = (req: Request, res: Response, next: NextFunction) => {

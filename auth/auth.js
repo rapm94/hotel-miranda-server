@@ -10,13 +10,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
-//const User = require('../models/user.schema')
+const User = require('../models/user.schema');
 const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
-const { PrismaClient } = require('@prisma/client');
+//const { PrismaClient} = require('@prisma/client')
 const bcrypt = require('bcrypt');
-const prisma = new PrismaClient();
-/* passport.use(
+//const prisma = new PrismaClient()
+/*  passport.use(
   'signup',
   new localStrategy(
     {
@@ -36,22 +36,17 @@ const prisma = new PrismaClient();
       }
     },
   ),
-)
- */
+) */
 passport.use('login', new localStrategy({
     usernameField: 'email',
     passwordField: 'password',
 }, (email, password, done) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield prisma.user.findUnique({
-            where: {
-                email: email,
-            },
-        });
+        const user = yield User.findOne({ email: email });
         if (!user) {
             return done(null, false, { message: 'User not found' });
         }
-        const isMatch = yield bcrypt.compareSync(password, user.password);
+        const isMatch = yield bcrypt.compare(password, user.password);
         if (!isMatch) {
             return done(null, false, { message: 'Incorrect password' });
         }
@@ -60,8 +55,20 @@ passport.use('login', new localStrategy({
     catch (error) {
         return done(error);
     }
-    finally {
-        prisma.$disconnect();
+})));
+passport.use(new JWTStrategy({
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+    secretOrKey: process.env.JWT_SECRET,
+}, (jwtPayload, done) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const user = yield User.findById(jwtPayload.uid);
+        if (!user) {
+            return done(null, false);
+        }
+        return done(null, user);
+    }
+    catch (error) {
+        return done(error);
     }
 })));
 /* passport.use(
@@ -72,36 +79,20 @@ passport.use('login', new localStrategy({
     },
     async (jwtPayload: any, done: any) => {
       try {
-        const user = await User.findById(jwtPayload.uid)
+        const user = await prisma.user.findUnique({
+          where: {
+            email: jwtPayload.uid.email,
+          },
+        })
         if (!user) {
           return done(null, false)
         }
         return done(null, user)
       } catch (error) {
         return done(error)
+      }finally{
+        prisma.$disconnect()
       }
     },
   ),
 ) */
-passport.use(new JWTStrategy({
-    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env.JWT_SECRET,
-}, (jwtPayload, done) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const user = yield prisma.user.findUnique({
-            where: {
-                email: jwtPayload.uid.email,
-            },
-        });
-        if (!user) {
-            return done(null, false);
-        }
-        return done(null, user);
-    }
-    catch (error) {
-        return done(error);
-    }
-    finally {
-        prisma.$disconnect();
-    }
-})));
