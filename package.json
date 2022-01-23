@@ -7,9 +7,7 @@
   "description": "Server for miranda web app and web page",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node index.ts",
-    "dev": "nodemon index.ts",
-    "dev2": "nodemon  ./bin/www",
+    "start": "nodemon ./bin/www",
     "test": "jest"
   },
   "author": "Raul Puigbo",
