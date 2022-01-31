@@ -1,12 +1,11 @@
 export {}
 import { Router, Request, Response } from 'express'
 const express = require('express')
-const router:Router = express.Router()
-let  roomsController  = require('../controllers/rooms.controller')
-let  bookingController  = require('../controllers/bookings.controller')
-let  reviewController  = require('../controllers/review.controller')
-let  userController  = require('../controllers/user.controller')
-
+const router: Router = express.Router()
+let roomsController = require('../controllers/rooms.controller')
+let bookingController = require('../controllers/bookings.controller')
+let reviewController = require('../controllers/review.controller')
+let userController = require('../controllers/user.controller')
 
 router.get('/', (req: Request, res: Response) => {
   res.json({
@@ -20,6 +19,7 @@ router
   .route('/rooms')
   .get(roomsController.getAllRooms)
   .post(roomsController.createRoom)
+  .get(roomsController.getRoomsBeetwenDates)
 
 router
   .route('/rooms/:id')
@@ -55,5 +55,4 @@ router
   .put(bookingController.updateBooking)
   .delete(bookingController.deleteBooking)
 
-
-module.exports = router;
+module.exports = router
