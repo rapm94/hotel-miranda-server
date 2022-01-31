@@ -17,9 +17,10 @@ jobs:
       - uses: azure/docker-login@v1
         with:
           login-server: miranda.azurecr.io
-          username: ${{ env.secrets.ACR_USERNAME }}
-          password: ${{ env.secrets.ACR_PASSWORD }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
 
       - run: |
+          echo ${{ secrets.ACR_USERNAME }}
           docker build . -t miranda.azurecr.io/hotel-miranda-server:${{ github.sha }}
           docker push miranda.azurecr.io/hotel-miranda-server:${{ github.sha }}
