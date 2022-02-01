@@ -24,6 +24,11 @@ const router = express.Router();
     })
   },
 ) */
+router.get("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    res.json({
+        message: "Welcome to auth route",
+    });
+}));
 router.post('/login', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     passport.authenticate('login', (err, user, info) => __awaiter(void 0, void 0, void 0, function* () {
         if (err) {

@@ -17,7 +17,8 @@ router.get('/', (req, res) => {
 router
     .route('/rooms')
     .get(roomsController.getAllRooms)
-    .post(roomsController.createRoom);
+    .post(roomsController.createRoom)
+    .get(roomsController.getRoomsBeetwenDates);
 router
     .route('/rooms/:id')
     .get(roomsController.getRoomById)

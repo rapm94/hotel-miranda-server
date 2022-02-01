@@ -28,7 +28,7 @@ const roomsController = {
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
         }
     }),
@@ -39,7 +39,7 @@ const roomsController = {
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
         }
     }),
@@ -50,7 +50,7 @@ const roomsController = {
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
         }
     }),
@@ -61,9 +61,51 @@ const roomsController = {
         }
         catch (err) {
             res.status(500).json({
-                message: err.message
+                message: err.message,
             });
         }
-    })
+    }),
+    getRoomsBeetwenDates: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            let rooms = yield Room.find({
+                $and: [
+                    {
+                        $or: [
+                            {
+                                checkIn: {
+                                    $gte: req.body.checkIn,
+                                },
+                            },
+                            {
+                                checkOut: {
+                                    $lte: req.body.checkOut,
+                                },
+                            },
+                        ],
+                    },
+                    {
+                        $or: [
+                            {
+                                checkIn: {
+                                    $lte: req.body.checkIn,
+                                },
+                            },
+                            {
+                                checkOut: {
+                                    $gte: req.body.checkOut,
+                                },
+                            },
+                        ],
+                    },
+                ],
+            });
+            res.status(200).json(rooms);
+        }
+        catch (err) {
+            res.status(500).json({
+                message: err.message,
+            });
+        }
+    }),
 };
 module.exports = roomsController;

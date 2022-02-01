@@ -16,26 +16,22 @@ require('./auth/auth')
 require("./db/mongo.config").dbConnection();
 
 
-
+var corsOptions = {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  exposedHeaders: "*",
+  allowedHeaders: "*",
+}
 
 let webRouter = require('./routes/web.route')
 let apiRouter = require('./routes/api.route')
 let loginRouter = require('./routes/login.route')
 
 const app: Application = express()
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PATCH, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
-
+app.use(cors(corsOptions))
+app.options('*', cors(corsOptions))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
-app.use(cors({
-  origin: "*",
-}))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))

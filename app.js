@@ -17,10 +17,18 @@ require('dotenv').config();
 require('./auth/auth');
 //DB Connection
 require("./db/mongo.config").dbConnection();
+var corsOptions = {
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    exposedHeaders: "*",
+    allowedHeaders: "*",
+};
 let webRouter = require('./routes/web.route');
 let apiRouter = require('./routes/api.route');
 let loginRouter = require('./routes/login.route');
 const app = (0, express_1.default)();
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express_1.default.json());
