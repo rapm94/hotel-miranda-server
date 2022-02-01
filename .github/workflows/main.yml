@@ -35,4 +35,4 @@ jobs:
         with:
           resource-group: contoso
           image: miranda.azurecr.io/hotel-miranda-server:${{ github.sha }}
-          name: miranda-server
+          app-name: miranda-server
