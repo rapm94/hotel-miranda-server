@@ -17,6 +17,7 @@ require("./db/mongo.config").dbConnection();
 
 
 
+
 let webRouter = require('./routes/web.route')
 let apiRouter = require('./routes/api.route')
 let loginRouter = require('./routes/login.route')
@@ -29,6 +30,7 @@ app.set('view engine', 'pug')
 app.use(express.json())
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    //@ts-ignore
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PATCH, DELETE');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');

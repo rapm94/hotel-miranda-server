@@ -17,6 +17,15 @@ const router = express.Router()
   },
 ) */
 
+router.get(
+  "/",
+  async (req: Request, res: Response, next: NextFunction) => {
+    res.json({
+      message: "Welcome to auth route",
+    })
+  }
+)
+
 router.post(
   '/login',
 async (req: Request, res: Response, next: NextFunction) => {
