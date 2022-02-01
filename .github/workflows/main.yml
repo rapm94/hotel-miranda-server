@@ -23,3 +23,7 @@ jobs:
       - run: |
           docker build . -t miranda.azurecr.io/hotel-miranda-server:${{ github.sha }}
           docker push miranda.azurecr.io/hotel-miranda-server:${{ github.sha }}
+      - uses: azure/webapps-deploy@v2
+        with:
+          app-name: "miranda-server"
+          images: "miranda.azurecr.io/hotel-miranda-server:${{ github.sha }}"
