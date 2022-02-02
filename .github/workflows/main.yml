@@ -39,3 +39,4 @@ jobs:
           name: miranda-server
           registry-username: ${{ secrets.ACR_USERNAME }}
           registry-password: ${{ secrets.ACR_PASSWORD }}
+          location: west europe
