@@ -35,5 +35,7 @@ jobs:
         with:
           resource-group: Miranda
           image: miranda.azurecr.io/hotel-miranda-server:${{ github.sha }}
-          app-name: miranda-server
+          dns-name-label: miranda.westeurope.azurecontainer.io
           name: miranda-server
+          registry-username: ${{ secrets.ACR_USERNAME }}
+          registry-password: ${{ secrets.ACR_PASSWORD }}
