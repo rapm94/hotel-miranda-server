@@ -9,12 +9,17 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       
-      - uses: azure/docker-login@v1
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: 'Login via docker'    
+        uses: azure/docker-login@v1
         with:
           login-server: miranda.azurecr.io
           username: ${{ secrets.ACR_USERNAME }}
@@ -23,3 +28,19 @@ jobs:
       - run: |
           docker build . -t miranda.azurecr.io/hotel-miranda-server:${{ github.sha }}
           docker push miranda.azurecr.io/hotel-miranda-server:${{ github.sha }}
+          
+          
+      - name: "Deploy to zure container instances" 
+        uses: azure/aci-deploy@v1
+        with:
+          resource-group: Miranda
+          image: miranda.azurecr.io/hotel-miranda-server:${{ github.sha }}
+          dns-name-label: miranda
+          name: miranda-server
+          registry-username: ${{ secrets.ACR_USERNAME }}
+          registry-password: ${{ secrets.ACR_PASSWORD }}
+          location: west europe
+          restart-policy: OnFailure
+          secure-environment-variables: JWT_SECRET=${{ secrets.JWT_SECRET }}, DB_CNN=${{ secrets.DB_CNN }}, PORT=${{ secrets.PORT }}
+          ports: 8000
+          
