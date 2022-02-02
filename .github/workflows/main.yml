@@ -36,3 +36,4 @@ jobs:
           resource-group: Miranda
           image: miranda.azurecr.io/hotel-miranda-server:${{ github.sha }}
           app-name: miranda-server
+          name: miranda-server
