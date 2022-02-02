@@ -33,6 +33,6 @@ jobs:
       - name: "Deploy to zure container instances" 
         uses: azure/webapps-deploy@v2
         with:
-          resource-group: contoso
+          resource-group: Miranda
           image: miranda.azurecr.io/hotel-miranda-server:${{ github.sha }}
           app-name: miranda-server
