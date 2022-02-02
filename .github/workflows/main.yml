@@ -40,3 +40,6 @@ jobs:
           registry-username: ${{ secrets.ACR_USERNAME }}
           registry-password: ${{ secrets.ACR_PASSWORD }}
           location: west europe
+          restart-policy: OnFailure
+          secure-enviroment-variables: JWT_SECRET=${{ secrets.JWT_SECRET }}, DB_CNN=${{ secrets.DB_CNN }}, PORT=${{ secrets.PORT }}
+          
